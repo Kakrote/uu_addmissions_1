@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UU Non-Branded Admissions LP — Wireframe v1 (Competitor View)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #18181B;
+            background-color: #E4E4E7;
+        }
+        .font-mono-spec {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Wireframe Spec Legend Styles (Page 18) */
+        .wf-placeholder {
+            border: 1.5px dashed #71717A;
+            background-color: #FAFAFA;
+        }
+        .wf-fill-box {
+            background-color: #F4F4F5;
+            border: 1px solid #D4D4D8;
+        }
+        .wf-dark-band {
+            background-color: #18181B;
+            color: #FAFAFA;
+        }
+        .wf-solid-cta {
+            background-color: #18181B;
+            color: #FFFFFF;
+            border: 1.5px solid #18181B;
+            transition: all 0.15s ease;
+        }
+        .wf-solid-cta:hover {
+            background-color: #3F3F46;
+            border-color: #3F3F46;
+        }
+        .wf-outline-cta {
+            background-color: #FFFFFF;
+            color: #18181B;
+            border: 1.5px solid #18181B;
+            transition: all 0.15s ease;
+        }
+        .wf-outline-cta:hover {
+            background-color: #F4F4F5;
+        }
+        .wf-diag-asset {
+            background-color: #E4E4E7;
+            border: 1px solid #A1A1AA;
+            background-image: repeating-linear-gradient(
+                -45deg,
+                rgba(24, 24, 27, 0.055),
+                rgba(24, 24, 27, 0.055) 8px,
+                transparent 8px,
+                transparent 16px
+            );
+        }
+
+        /* Section Badge */
+        .sec-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border: 1px solid #18181B;
+            background: #FFFFFF;
+            color: #18181B;
+        }
+        .sec-tag-dark {
+            border-color: #52525B;
+            background: #27272A;
+            color: #E4E4E7;
+        }
+
+        /* Marquee Ticker */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: max-content;
+            animation: marquee 26s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+
+        /* Viewport Container */
+        #wireframe-canvas {
+            transition: max-width 0.3s ease;
+            margin: 0 auto;
+            background: #FFFFFF;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.14);
+        }
+        #wireframe-canvas.desktop-view {
+            max-width: 1240px;
+        }
+        #wireframe-canvas.mobile-view {
+            max-width: 390px;
+            border-left: 8px solid #18181B;
+            border-right: 8px solid #18181B;
+        }
+    </style>
+</head>
+<body class="pb-20">
+
+    <!-- WIREFRAME SPECIFICATION TOOLBAR & LEGEND -->
+    <div class="bg-zinc-950 text-zinc-200 border-b border-zinc-800 px-4 py-2.5 text-xs">
+        <div class="max-w-[1240px] mx-auto flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <span class="font-mono-spec font-bold bg-white text-zinc-950 px-2 py-0.5">WIREFRAME V1</span>
+                <span class="font-semibold">UU Non-Branded Admissions LP — Competitor Analysis Flow</span>
+                <span class="hidden md:inline text-zinc-400 font-mono-spec">| 23 Sections · Low-Fidelity</span>
+            </div>
+
+            <!-- Legend (Page 18) -->
+            <div class="hidden xl:flex items-center gap-4 font-mono-spec text-[11px]">
+                <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 border border-dashed border-zinc-400 inline-block"></span> Placeholder</span>
+                <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 bg-zinc-700 inline-block"></span> Fill Box</span>
+                <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 bg-white inline-block"></span> Solid Box</span>
+                <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 wf-diag-asset inline-block"></span> Diag Fill</span>
+            </div>
+
+            <!-- Viewport Switcher + Exit Intent Preview -->
+            <div class="flex items-center gap-2 font-mono-spec">
+                <button onclick="setViewport('desktop')" id="btn-desktop" class="px-2.5 py-1 bg-white text-zinc-950 font-bold text-[11px]">Desktop 1240px</button>
+                <button onclick="setViewport('mobile')" id="btn-mobile" class="px-2.5 py-1 border border-zinc-600 text-zinc-300 text-[11px]">Mobile 390px</button>
+                <button onclick="openExitModal()" class="px-2.5 py-1 border border-amber-400/60 text-amber-300 hover:bg-amber-400/10 text-[11px]">Exit Modal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN WIREFRAME CANVAS -->
+    <div id="wireframe-canvas" class="desktop-view relative">
+
+        <!-- 01 UTILITY BAR -->
+        <div class="wf-dark-band px-4 md:px-8 py-2 text-xs border-b border-zinc-700">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center gap-2.5">
+                    <span class="sec-tag sec-tag-dark">01 Utility Bar</span>
+                    <span class="bg-white text-zinc-950 font-mono-spec text-[10px] font-bold px-2 py-0.5 uppercase">Admissions 2027–28</span>
+                </div>
+                <div class="flex items-center gap-4 font-mono-spec text-[11px]">
+                    <a href="tel:18002124201" class="hover:underline">Toll-free: 1800 212 4201</a>
+                    <span class="text-zinc-600">|</span>
+                    <a href="#hero-form" class="hover:underline">WhatsApp</a>
+                    <span class="text-zinc-600">|</span>
+                    <a href="#hero-form" class="underline font-bold">Login</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 02 STICKY NAV -->
+        <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b-2 border-zinc-900 px-4 md:px-8 py-3.5">
+            <div class="flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="wf-placeholder px-3 py-2 font-mono-spec text-xs font-bold">LOGO LOCKUP</div>
+                    <div>
+                        <div class="font-extrabold text-sm md:text-base leading-tight">Uttaranchal University</div>
+                        <div class="font-mono-spec text-[10px] text-zinc-500 uppercase">02 Sticky Nav · Dehradun</div>
+                    </div>
+                </div>
+
+                <nav class="hidden lg:flex items-center gap-6 text-sm font-medium">
+                    <a href="#sec-10" class="hover:underline">Courses</a>
+                    <a href="#sec-12" class="hover:underline">Scholarships</a>
+                    <a href="#sec-09" class="hover:underline">Placements</a>
+                    <a href="#sec-14" class="hover:underline">Campus</a>
+                    <a href="#sec-20" class="hover:underline">FAQs</a>
+                </nav>
+
+                <a href="#hero-form" class="wf-solid-cta px-4 py-2 text-xs md:text-sm font-bold">
+                    Apply CTA
+                </a>
+            </div>
+        </header>
+
+        <!-- 03 HERO (Background Slideshow / Video + Copy + 3 Stats + Inline Enquiry Form) -->
+        <section id="sec-03" class="wf-diag-asset px-4 md:px-8 py-10 md:py-14 border-b-2 border-zinc-900">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-6">
+                <span class="sec-tag">03 Hero · Slideshow / Looping Video + Primary Conversion Form</span>
+                <!-- Interactive Slide / Video Switcher -->
+                <div class="flex items-center gap-1.5 bg-white border border-zinc-900 p-1 font-mono-spec text-[10px]">
+                    <button onclick="setHeroSlide(0)" class="hero-slide-btn px-2 py-0.5 bg-zinc-900 text-white font-bold">Slide 1</button>
+                    <button onclick="setHeroSlide(1)" class="hero-slide-btn px-2 py-0.5 text-zinc-700">Slide 2</button>
+                    <button onclick="setHeroSlide(2)" class="hero-slide-btn px-2 py-0.5 text-zinc-700">Slide 3</button>
+                    <button onclick="setHeroSlide(3)" class="hero-slide-btn px-2 py-0.5 text-zinc-700">Slide 4</button>
+                    <button onclick="openLightbox('Hero Campus Film · Autoplay Loop')" class="px-2 py-0.5 border-l border-zinc-300 font-bold">▶ Video</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Left Column: Headline, Lede, CTAs & 3 Stats -->
+                <div class="lg:col-span-7 bg-white/95 border border-zinc-300 p-6 md:p-8 space-y-6">
+                    <div class="inline-block font-mono-spec text-[11px] font-bold uppercase px-2.5 py-1 bg-zinc-100 border border-zinc-900" id="hero-slide-caption">
+                        Slide 01 / 04 · Crossfade Campus Aerial View
+                    </div>
+
+                    <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-[1.12]">
+                        Shape a career that is <span class="bg-zinc-900 text-white px-2">Uniquely YOU</span> in the Doon Valley.
+                    </h1>
+
+                    <p class="text-base md:text-lg text-zinc-600 leading-relaxed">
+                        Join the 2027–28 intake across 100+ industry-aligned undergraduate, postgraduate, and doctoral programmes in Dehradun.
+                    </p>
+
+                    <div class="flex flex-wrap items-center gap-4">
+                        <a href="#hero-form" class="wf-solid-cta px-6 py-3.5 text-sm font-bold">
+                            Apply Now for 2027–28 →
+                        </a>
+                        <button onclick="openLightbox('90-Second Campus Film')" class="wf-outline-cta px-5 py-3.5 text-sm font-bold">
+                            ► Watch the campus film
+                        </button>
+                    </div>
+
+                    <!-- 3 Stat Boxes -->
+                    <div class="grid grid-cols-3 gap-3 pt-2">
+                        <div class="wf-fill-box p-4">
+                            <div class="font-mono-spec text-[10px] text-zinc-500 uppercase">Stat 01</div>
+                            <div class="text-2xl md:text-3xl font-extrabold">80%</div>
+                            <div class="text-xs text-zinc-600">Placements</div>
+                        </div>
+                        <div class="wf-fill-box p-4">
+                            <div class="font-mono-spec text-[10px] text-zinc-500 uppercase">Stat 02</div>
+                            <div class="text-2xl md:text-3xl font-extrabold">₹45 L</div>
+                            <div class="text-xs text-zinc-600">Top offer</div>
+                        </div>
+                        <div class="wf-fill-box p-4">
+                            <div class="font-mono-spec text-[10px] text-zinc-500 uppercase">Stat 03</div>
+                            <div class="text-2xl md:text-3xl font-extrabold">12</div>
+                            <div class="text-xs text-zinc-600">Schools</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Inline Enquiry Form Primary Conversion -->
+                <div id="hero-form" class="lg:col-span-5 bg-white border-2 border-zinc-900 p-6 md:p-7 shadow-lg">
+                    <div class="font-mono-spec text-[10px] text-zinc-500 uppercase mb-1">Enquiry Form · Primary Conversion</div>
+                    <h2 class="text-xl md:text-2xl font-extrabold">Start your 2027–28 application</h2>
+                    <p class="text-xs text-zinc-600 mt-1 mb-5">
+                        Share your details and an admissions counsellor will call within 24 hours.
+                    </p>
+
+                    <form onsubmit="handleSubmit(event, 'Application enquiry registered!')" class="space-y-3 text-xs">
+                        <div>
+                            <label class="block font-mono-spec font-bold uppercase text-[10px] mb-1">Name</label>
+                            <input type="text" required placeholder="Your full name" class="w-full border border-zinc-900 px-3 py-2.5 text-sm">
+                        </div>
+                        <div>
+                            <label class="block font-mono-spec font-bold uppercase text-[10px] mb-1">Phone</label>
+                            <input type="tel" required placeholder="+91 10-digit mobile number" class="w-full border border-zinc-900 px-3 py-2.5 text-sm">
+                        </div>
+                        <div>
+                            <label class="block font-mono-spec font-bold uppercase text-[10px] mb-1">Email</label>
+                            <input type="email" required placeholder="name@email.com" class="w-full border border-zinc-900 px-3 py-2.5 text-sm">
+                        </div>
+                        <div>
+                            <label class="block font-mono-spec font-bold uppercase text-[10px] mb-1">Programme (Dropdown)</label>
+                            <select required class="w-full border border-zinc-900 px-3 py-2.5 text-sm bg-white">
+                                <option value="">Select preferred programme</option>
+                                <option>B.Tech Computer Science & Engineering</option>
+                                <option>BA LLB (Hons) / BBA LLB (Hons)</option>
+                                <option>MBA / BBA (Hons)</option>
+                                <option>B.Pharm / Pharm.D</option>
+                                <option>BCA / MCA</option>
+                                <option>B.Sc Nursing / BPT</option>
+                            </select>
+                        </div>
+                        <label class="flex items-start gap-2 pt-1 cursor-pointer text-[11px] text-zinc-600">
+                            <input type="checkbox" required checked class="mt-0.5 accent-zinc-900">
+                            <span>I agree to receive calls, SMS, email & WhatsApp updates from Uttaranchal University regarding my 2027–28 application.</span>
+                        </label>
+                        <button type="submit" class="wf-solid-cta w-full py-3.5 text-sm font-bold mt-2">
+                            Submit Application Enquiry →
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04 BRAND BAND ("Uniquely YOU" Full Width Dark Band) -->
+        <section id="sec-04" class="wf-dark-band px-4 md:px-8 py-10 text-center border-b border-zinc-800">
+            <span class="sec-tag sec-tag-dark mb-3">04 Brand Band · Full Width</span>
+            <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight">#UniquelyYOU</h2>
+            <p class="text-sm md:text-base text-zinc-300 max-w-xl mx-auto mt-2">
+                One campus, twelve disciplines, and an academic path tailored to your ambition.
+            </p>
+        </section>
+
+        <!-- 05 TICKER (Scrolling Marquee · Tappable to Form) -->
+        <a href="#hero-form" id="sec-05" class="block py-3 bg-zinc-100 border-b border-zinc-300 overflow-hidden hover:bg-zinc-200 transition">
+            <div class="animate-marquee font-mono-spec text-xs font-bold uppercase tracking-wider flex items-center gap-6">
+                <span>[05 TAPPABLE TICKER]</span>
+                <span>Admissions open 2027–28</span>
+                <span>•</span>
+                <span>Uniquely YOU</span>
+                <span>•</span>
+                <span class="underline">Apply now →</span>
+                <span>•</span>
+                <span>Admissions open 2027–28</span>
+                <span>•</span>
+                <span>Uniquely YOU</span>
+                <span>•</span>
+                <span class="underline">Apply now →</span>
+                <span>•</span>
+                <span>Admissions open 2027–28</span>
+                <span>•</span>
+                <span>Uniquely YOU</span>
+                <span>•</span>
+                <span class="underline">Apply now →</span>
+            </div>
+        </a>
+
+        <!-- 06 RANKINGS & SEALS (4 Rank Cards + 5 Seals) -->
+        <section id="sec-06" class="px-4 md:px-8 py-12 border-b border-zinc-300">
+            <div class="mb-6">
+                <span class="sec-tag mb-2">06 Rankings & Seals</span>
+                <div class="font-mono-spec text-xs text-zinc-500 uppercase mt-1">Accreditations & Benchmarks</div>
+                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Ranked. Rated. Recognised.</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="border-2 border-zinc-900 p-5">
+                    <div class="font-mono-spec text-[10px] text-zinc-500 uppercase">Rank 01</div>
+                    <div class="text-3xl font-extrabold my-1.5">#75</div>
+                    <div class="font-bold text-sm">NIRF India Rankings 2025</div>
+                    <div class="text-xs text-zinc-600">Pharmacy Category</div>
+                </div>
+                <div class="border-2 border-zinc-900 p-5">
+                    <div class="font-mono-spec text-[10px] text-zinc-500 uppercase">Rank 02</div>
+                    <div class="text-3xl font-extrabold my-1.5">A+</div>
+                    <div class="font-bold text-sm">NAAC Accredited</div>
+                    <div class="text-xs text-zinc-600">First Cycle Grade</div>
+                </div>
+                <div class="border-2 border-zinc-900 p-5">
+                    <div class="font-mono-spec text-[10px] text-zinc-500 uppercase">Rank 03</div>
+                    <div class="text-3xl font-extrabold my-1.5">AAA+</div>
+                    <div class="font-bold text-sm">Careers360 Rating</div>
+                    <div class="text-xs text-zinc-600">Regional University Rating</div>
+                </div>
+                <div class="border-2 border-zinc-900 p-5">
+                    <div class="font-mono-spec text-[10px] text-zinc-500 uppercase">Rank 04</div>
+                    <div class="text-3xl font-extrabold my-1.5">601–800</div>
+                    <div class="font-bold text-sm">THE Impact Band</div>
+                    <div class="text-xs text-zinc-600">Global Sustainability Rankings</div>
+                </div>
+            </div>
+
+            <!-- 5 Statutory Seals -->
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                <div class="wf-placeholder p-3 text-center font-mono-spec text-xs font-bold">SEAL · UGC 2(f) & 12(B)</div>
+                <div class="wf-placeholder p-3 text-center font-mono-spec text-xs font-bold">SEAL · AICTE</div>
+                <div class="wf-placeholder p-3 text-center font-mono-spec text-xs font-bold">SEAL · BCI (LAW)</div>
+                <div class="wf-placeholder p-3 text-center font-mono-spec text-xs font-bold">SEAL · PCI (PHARMACY)</div>
+                <div class="wf-placeholder p-3 text-center font-mono-spec text-xs font-bold col-span-2 sm:col-span-1">SEAL · AIU MEMBER</div>
+            </div>
+        </section>
+
+        <!-- 07 BIG NUMBERS (10 Stat Tiles) -->
+        <section id="sec-07" class="px-4 md:px-8 py-12 border-b border-zinc-300 bg-zinc-50">
+            <div class="mb-6">
+                <span class="sec-tag mb-2">07 Big Numbers · 10 Stat Tiles</span>
+                <div class="font-mono-spec text-xs text-zinc-500 uppercase mt-1">University Scale</div>
+                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">By the numbers</h2>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                <div class="bg-white border border-zinc-300 p-4"><div class="text-2xl font-extrabold">80%</div><div class="text-xs text-zinc-600">Placement rate</div></div>
+                <div class="bg-white border border-zinc-300 p-4"><div class="text-2xl font-extrabold">₹45 L</div><div class="text-xs text-zinc-600">Highest package</div></div>
+                <div class="bg-white border border-zinc-300 p-4"><div class="text-2xl font-extrabold">15K+</div><div class="text-xs text-zinc-600">Students on campus</div></div>
+                <div class="bg-white border border-zinc-300 p-4"><div class="text-2xl font-extrabold">1200+</div><div class="text-xs text-zinc-600">Recruiting companies</div></div>
+                <div class="bg-white border border-zinc-300 p-4"><div class="text-2xl font-extrabold">12</div><div class="text-xs text-zinc-600">Academic schools</div></div>
+                <div class="bg-white border border-zinc-300 p-4"><div class="text-2xl font-extrabold">120</div><div class="text-xs text-zinc-600">Green campus acres</div></div>
+                <div class="bg-white border border-zinc-300 p-4"><div class="text-2xl font-extrabold">200+</div><div class="text-xs text-zinc-600">Student patents</div></div>
+                <div class="bg-white border border-zinc-300 p-4"><div class="text-2xl font-extrabold">35+</div><div class="text-xs text-zinc-600">Global partners</div></div>
+                <div class="bg-white border border-zinc-300 p-4"><div class="text-2xl font-extrabold">8000+</div><div class="text-xs text-zinc-600">Research publications</div></div>
+                <div class="bg-white border border-zinc-300 p-4"><div class="text-2xl font-extrabold">100+</div><div class="text-xs text-zinc-600">Programmes offered</div></div>
+            </div>
+        </section>
+
+        <!-- 08 WELCOME + PHOTO GRID (Copy Block + Asymmetric 6-Photo Grid) -->
+        <section id="sec-08" class="px-4 md:px-8 py-12 border-b border-zinc-300">
+            <span class="sec-tag mb-4">08 Welcome + Photo Grid (Copy + 6 Campus Tiles)</span>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Left Copy Block -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="font-mono-spec text-xs font-bold uppercase text-zinc-500">Welcome to Dehradun</div>
+                    <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight">Learning built around doing.</h2>
+                    <p class="text-sm text-zinc-600 leading-relaxed">
+                        Founded in Premnagar, Dehradun, Uttaranchal University brings twelve specialised schools together on a single residential campus—combining statutory rigour with multidisciplinary freedom.
+                    </p>
+                    <p class="text-sm text-zinc-600 leading-relaxed">
+                        From moot courts and clinical pharmacies to AI cloud studios and hospitality kitchens, students learn by practising inside real-world environments from their very first semester.
+                    </p>
+                    <div class="pt-2">
+                        <a href="#sec-10" class="wf-solid-cta inline-block px-6 py-3 text-sm font-bold">
+                            Find your course →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Asymmetric Photo Grid (6 Tiles) -->
+                <div class="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    <div class="wf-diag-asset col-span-2 row-span-2 min-h-[220px] flex items-center justify-center p-4">
+                        <span class="bg-white border border-zinc-900 px-3 py-1 font-mono-spec text-xs font-bold">PHOTO HERO TILE · CAMPUS</span>
+                    </div>
+                    <div class="wf-diag-asset min-h-[104px] flex items-center justify-center p-3">
+                        <span class="bg-white border border-zinc-800 px-2 py-0.5 font-mono-spec text-[11px] font-bold">PHOTO · LABS</span>
+                    </div>
+                    <div class="wf-diag-asset min-h-[104px] flex items-center justify-center p-3">
+                        <span class="bg-white border border-zinc-800 px-2 py-0.5 font-mono-spec text-[11px] font-bold">PHOTO · LIBRARY</span>
+                    </div>
+                    <div class="wf-diag-asset min-h-[104px] flex items-center justify-center p-3">
+                        <span class="bg-white border border-zinc-800 px-2 py-0.5 font-mono-spec text-[11px] font-bold">PHOTO · HOSTELS</span>
+                    </div>
+                    <div class="wf-diag-asset min-h-[104px] flex items-center justify-center p-3">
+                        <span class="bg-white border border-zinc-800 px-2 py-0.5 font-mono-spec text-[11px] font-bold">PHOTO · AUDITORIUM</span>
+                    </div>
+                    <div class="wf-diag-asset min-h-[104px] flex items-center justify-center p-3">
+                        <span class="bg-white border border-zinc-800 px-2 py-0.5 font-mono-spec text-[11px] font-bold">PHOTO · CAMPUS LIFE</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 09 PLACEMENT HIGHLIGHT (Full-Width Single-Stat Band) -->
+        <section id="sec-09" class="wf-dark-band px-4 md:px-8 py-12 text-center border-b border-zinc-800">
+            <span class="sec-tag sec-tag-dark mb-3">09 Placement Highlight · Single-Stat Band</span>
+            <div class="font-mono-spec text-xs uppercase tracking-widest text-zinc-400">2025 Placement Milestone</div>
+            <div class="text-5xl md:text-7xl font-extrabold my-2 tracking-tight">₹45 LPA</div>
+            <p class="text-sm md:text-base text-zinc-300 max-w-lg mx-auto">
+                Highest international hospitality & management package offered by Hyatt Regency, alongside ₹19.5 LPA from Zscaler.
+            </p>
+        </section>
+
+        <!-- 10 SCHOOLS / COURSE EXPLORER (12 School Tiles + UG / PG Toggle) -->
+        <section id="sec-10" class="px-4 md:px-8 py-12 border-b border-zinc-300">
+            <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
+                <div>
+                    <span class="sec-tag mb-2">10 Schools / Course Explorer · 12 Tiles + UG/PG Toggle</span>
+                    <div class="font-mono-spec text-xs text-zinc-500 uppercase mt-1">Pick your path</div>
+                    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">12 Schools. One YOU.</h2>
+                </div>
+
+                <!-- UG / PG Toggle -->
+                <div class="inline-flex border-2 border-zinc-900 font-mono-spec text-xs font-bold">
+                    <button id="toggle-ug" onclick="setCourseLevel('UG')" class="px-4 py-2 bg-zinc-900 text-white">UG Programmes</button>
+                    <button id="toggle-pg" onclick="setCourseLevel('PG')" class="px-4 py-2 bg-white text-zinc-900">PG Programmes</button>
+                </div>
+            </div>
+
+            <div id="competitor-schools-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <!-- Populated dynamically for UG and PG -->
+            </div>
+        </section>
+
+        <!-- 11 OFFER-LETTER MOCK (Interactive 3-Step Offer Card) -->
+        <section id="sec-11" class="px-4 md:px-8 py-12 border-b border-zinc-300 bg-zinc-50">
+            <div class="mb-6">
+                <span class="sec-tag mb-2">11 Offer-Letter Mock · Interactive 3-Step Generator</span>
+                <div class="font-mono-spec text-xs text-zinc-500 uppercase mt-1">Visualise Your Graduation Outcome</div>
+                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Generate your UU offer letter</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                <!-- 3-Step Form -->
+                <form onsubmit="generateOfferLetter(event)" class="lg:col-span-5 bg-white border-2 border-zinc-900 p-6 space-y-4">
+                    <div>
+                        <label class="block font-mono-spec text-[11px] font-bold uppercase mb-1">Step 1 · Choose programme</label>
+                        <select id="offer-prog" class="w-full border border-zinc-900 px-3 py-2.5 text-sm bg-white">
+                            <option value="B.Tech Computer Science">B.Tech Computer Science</option>
+                            <option value="BBA LLB (Hons)">BBA LLB (Hons)</option>
+                            <option value="Master of Business Administration (MBA)">Master of Business Administration (MBA)</option>
+                            <option value="B.Pharm (Pharmacy)">B.Pharm (Pharmacy)</option>
+                            <option value="BHM (Hotel Management)">BHM (Hotel Management)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block font-mono-spec text-[11px] font-bold uppercase mb-1">Step 2 · Dream role</label>
+                        <input id="offer-role" type="text" required value="AI Solutions Architect" placeholder="e.g. Corporate Counsel, Product Manager" class="w-full border border-zinc-900 px-3 py-2.5 text-sm">
+                    </div>
+                    <div>
+                        <label class="block font-mono-spec text-[11px] font-bold uppercase mb-1">Step 3 · Your Name</label>
+                        <input id="offer-name" type="text" required value="Rohan Negi" placeholder="Enter your full name" class="w-full border border-zinc-900 px-3 py-2.5 text-sm">
+                    </div>
+                    <button type="submit" class="wf-solid-cta w-full py-3 text-sm font-bold">
+                        Generate letter →
+                    </button>
+                </form>
+
+                <!-- Mock Offer Letter Preview -->
+                <div class="lg:col-span-7 bg-white border-2 border-zinc-900 p-6 md:p-8 flex flex-col justify-between relative">
+                    <div>
+                        <div class="flex items-center justify-between border-b border-zinc-300 pb-4 mb-5">
+                            <div class="flex items-center gap-3">
+                                <div class="wf-placeholder px-2.5 py-1.5 font-mono-spec text-[10px] font-bold">UU SEAL</div>
+                                <div>
+                                    <div class="font-extrabold text-sm">Uttaranchal University · Placement Cell</div>
+                                    <div class="font-mono-spec text-[10px] text-zinc-500">DEHRADUN · ILLUSTRATIVE CAREER PREVIEW</div>
+                                </div>
+                            </div>
+                            <span class="border-2 border-zinc-900 px-2.5 py-1 font-mono-spec text-xs font-extrabold rotate-[-3deg]">PLACED · 2031</span>
+                        </div>
+
+                        <h3 class="text-2xl font-extrabold mb-3">Provisional Career Offer Preview</h3>
+                        <p class="text-sm md:text-base text-zinc-700 leading-relaxed">
+                            Dear <strong id="preview-name" class="underline">Rohan Negi</strong>, congratulations. Upon completing your <strong id="preview-prog">B.Tech Computer Science</strong> at Uttaranchal University, Dehradun, you are selected for the role of <strong id="preview-role">AI Solutions Architect</strong>.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 pt-6 mt-6 border-t border-zinc-200 text-xs">
+                        <div>
+                            <div class="font-mono-spec text-[10px] text-zinc-400 uppercase">Candidate</div>
+                            <div class="font-bold mt-0.5" id="preview-name-foot">Rohan Negi</div>
+                        </div>
+                        <div>
+                            <div class="font-mono-spec text-[10px] text-zinc-400 uppercase">Programme</div>
+                            <div class="font-bold mt-0.5" id="preview-prog-foot">B.Tech Computer Science</div>
+                        </div>
+                        <div>
+                            <div class="font-mono-spec text-[10px] text-zinc-400 uppercase">Class Of</div>
+                            <div class="font-bold mt-0.5">2031</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12 SCHOLARSHIP CALCULATOR (4 Tiers + Calculator + Lock My Scholarship Form) -->
+        <section id="sec-12" class="px-4 md:px-8 py-12 border-b border-zinc-300">
+            <div class="mb-6">
+                <span class="sec-tag mb-2">12 Scholarship Calculator · 4 Tiers + Live Calculator</span>
+                <div class="font-mono-spec text-xs text-zinc-500 uppercase mt-1">Merit & Need-Based Financial Aid</div>
+                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Scholarship tiers + live calculator</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <!-- 4 Tier Cards -->
+                <div class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="border-2 border-zinc-900 p-5">
+                        <div class="font-mono-spec text-[10px] text-zinc-500 uppercase">Tier 01</div>
+                        <div class="text-3xl font-extrabold my-1">100%</div>
+                        <div class="font-bold text-sm">Chancellor’s Merit</div>
+                        <p class="text-xs text-zinc-600 mt-1">95%+ aggregate in Class 12 or 90+ percentile in national exam.</p>
+                    </div>
+                    <div class="border border-zinc-400 p-5">
+                        <div class="font-mono-spec text-[10px] text-zinc-500 uppercase">Tier 02</div>
+                        <div class="text-3xl font-extrabold my-1">60%</div>
+                        <div class="font-bold text-sm">Academic Distinction</div>
+                        <p class="text-xs text-zinc-600 mt-1">85% – 94.9% in Class 12 qualifying board exams.</p>
+                    </div>
+                    <div class="border border-zinc-400 p-5">
+                        <div class="font-mono-spec text-[10px] text-zinc-500 uppercase">Tier 03</div>
+                        <div class="text-3xl font-extrabold my-1">35%</div>
+                        <div class="font-bold text-sm">Merit & Hill Domicile</div>
+                        <p class="text-xs text-zinc-600 mt-1">75% – 84.9% in Class 12 or Uttarakhand domicile certificate.</p>
+                    </div>
+                    <div class="border border-zinc-400 p-5">
+                        <div class="font-mono-spec text-[10px] text-zinc-500 uppercase">Tier 04</div>
+                        <div class="text-3xl font-extrabold my-1">20%</div>
+                        <div class="font-bold text-sm">Early Merit & Defence</div>
+                        <p class="text-xs text-zinc-600 mt-1">65% – 74.9% in Class 12 or wards of defence personnel.</p>
+                    </div>
+                </div>
+
+                <!-- Calculator Card + Lock Form -->
+                <div class="lg:col-span-6 bg-zinc-50 border-2 border-zinc-900 p-6 space-y-4">
+                    <h3 class="text-lg font-extrabold">Calculate your 2027–28 tuition waiver</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-end">
+                        <div>
+                            <label class="block font-mono-spec text-[10px] font-bold uppercase mb-1">Input Class 12 %</label>
+                            <input id="comp-score" type="number" min="40" max="100" value="87" class="w-full border-2 border-zinc-900 bg-white px-3 py-2 text-base font-mono-spec font-bold">
+                        </div>
+                        <button type="button" onclick="runCompetitorCalc()" class="wf-solid-cta py-2.5 px-4 text-sm font-bold">
+                            Calculate →
+                        </button>
+                    </div>
+
+                    <label class="flex items-center gap-2 text-xs font-medium cursor-pointer">
+                        <input id="need-topup" type="checkbox" onchange="runCompetitorCalc()" class="accent-zinc-900 w-4 h-4">
+                        <span>Need-based / Girl Child / Defence ward top-up (+10%)</span>
+                    </label>
+
+                    <div class="bg-white border border-dashed border-zinc-800 p-4 flex items-center justify-between">
+                        <span class="font-mono-spec text-xs uppercase text-zinc-500">Estimated Scholarship</span>
+                        <span id="comp-calc-result" class="text-2xl font-extrabold font-mono-spec">60% Tuition Waiver</span>
+                    </div>
+
+                    <!-- Lock My Scholarship Mini Form -->
+                    <form onsubmit="handleSubmit(event, 'Scholarship slab locked! Counsellor will verify documents.')" class="pt-2 border-t border-zinc-300 flex flex-col sm:flex-row gap-2">
+                        <input type="tel" required placeholder="Enter mobile to lock scholarship" class="flex-1 border border-zinc-900 bg-white px-3 py-2.5 text-xs">
+                        <button type="submit" class="wf-outline-cta px-4 py-2.5 text-xs font-bold shrink-0">
+                            Lock my scholarship
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13 CAMPUS FILM (Video 16:9 Lightbox) -->
+        <section id="sec-13" class="px-4 md:px-8 py-12 border-b border-zinc-300 bg-zinc-50">
+            <div class="max-w-4xl mx-auto text-center space-y-4">
+                <span class="sec-tag">13 Campus Film · 16:9 Lightbox</span>
+                <div class="font-mono-spec text-xs text-zinc-500 uppercase">Learn in the Doon Valley</div>
+                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">90-second campus film</h2>
+
+                <div onclick="openLightbox('90-Second Campus Film · Doon Valley Tour')" class="wf-diag-asset aspect-video flex flex-col items-center justify-center p-6 cursor-pointer hover:border-zinc-900 transition">
+                    <div class="w-16 h-16 bg-white border-2 border-zinc-900 rounded-full flex items-center justify-center text-xl font-bold shadow">
+                        ▶
+                    </div>
+                    <div class="mt-3 bg-white border border-zinc-900 px-4 py-1.5 font-mono-spec text-xs font-bold">
+                        VIDEO POSTER FRAME · TAP TO OPEN LIGHTBOX
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 14 CAROUSEL (Photos / Culture · Arrows + Dots + Auto-advance 5s) -->
+        <section id="sec-14" class="px-4 md:px-8 py-12 border-b border-zinc-300">
+            <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
+                <div>
+                    <span class="sec-tag mb-2">14 Carousel · Arrows + Dots + 5s Auto-Advance</span>
+                    <div class="font-mono-spec text-xs text-zinc-500 uppercase mt-1">Life at UU</div>
+                    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Campus culture & student spaces</h2>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="moveCarousel(-1)" aria-label="Previous slide" class="wf-outline-cta w-10 h-10 font-bold">←</button>
+                    <button onclick="moveCarousel(1)" aria-label="Next slide" class="wf-outline-cta w-10 h-10 font-bold">→</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="culture-carousel">
+                <!-- Rendered by JS -->
+            </div>
+
+            <div class="flex items-center justify-center gap-2 mt-5" id="carousel-dots">
+                <!-- Dots rendered by JS -->
+            </div>
+        </section>
+
+        <!-- 15 INDUSTRY INSIGHTS (4 Industry Tabs + Animated Charts + Expandable Data Table) -->
+        <section id="sec-15" class="px-4 md:px-8 py-12 border-b border-zinc-300 bg-zinc-50">
+            <div class="mb-6">
+                <span class="sec-tag mb-2">15 Industry Insights · 4 Tabs + Animated Chart + Data Table</span>
+                <div class="font-mono-spec text-xs text-zinc-500 uppercase mt-1">Where the careers are growing</div>
+                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Industry outlook for 2027–2031 graduates</h2>
+            </div>
+
+            <!-- 4 Tabs -->
+            <div class="flex flex-wrap gap-2 mb-6" id="industry-tabs">
+                <button onclick="selectIndustryTab(0)" class="ind-tab px-4 py-2.5 text-xs font-bold bg-zinc-900 text-white border border-zinc-900">Tech & AI</button>
+                <button onclick="selectIndustryTab(1)" class="ind-tab px-4 py-2.5 text-xs font-bold bg-white text-zinc-900 border border-zinc-400">Pharma & Healthcare</button>
+                <button onclick="selectIndustryTab(2)" class="ind-tab px-4 py-2.5 text-xs font-bold bg-white text-zinc-900 border border-zinc-400">Hospitality & Tourism</button>
+                <button onclick="selectIndustryTab(3)" class="ind-tab px-4 py-2.5 text-xs font-bold bg-white text-zinc-900 border border-zinc-400">Graduate Employability</button>
+            </div>
+
+            <div class="bg-white border-2 border-zinc-900 p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Animated Bar Chart -->
+                <div class="lg:col-span-6 space-y-4">
+                    <div class="font-mono-spec text-[11px] text-zinc-500 uppercase">Projected Demand Index (2025 → 2030)</div>
+                    <div id="industry-bars" class="space-y-3 pt-2">
+                        <!-- Animated bars injected by JS -->
+                    </div>
+                </div>
+
+                <!-- Supporting Block -->
+                <div class="lg:col-span-6 space-y-4">
+                    <h3 id="ind-title" class="text-xl font-extrabold">Industry at a glance: AI & Cloud Engineering</h3>
+                    <p id="ind-desc" class="text-sm text-zinc-600 leading-relaxed">
+                        Enterprise adoption of generative AI, cloud security, and data engineering is creating high-growth roles for computer science graduates trained on live production stacks.
+                    </p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="wf-fill-box p-3.5">
+                            <div id="ind-stat1-val" class="text-2xl font-extrabold">38%</div>
+                            <div id="ind-stat1-lbl" class="text-xs text-zinc-600">CAGR in AI & Cloud hiring</div>
+                        </div>
+                        <div class="wf-fill-box p-3.5">
+                            <div id="ind-stat2-val" class="text-2xl font-extrabold">₹19.5 L</div>
+                            <div id="ind-stat2-lbl" class="text-xs text-zinc-600">Top UU tech offer (Zscaler)</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap items-center justify-between gap-2 pt-2 text-xs">
+                        <span id="ind-source" class="font-mono-spec text-[11px] text-zinc-500">Source: NASSCOM & UU Placement Report 2025</span>
+                        <button onclick="toggleIndustryTable()" class="underline font-mono-spec font-bold">Expand to data table ↓</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collapsible Data Table -->
+            <div id="industry-table-wrap" class="hidden mt-3 bg-white border border-zinc-900 p-4 overflow-x-auto">
+                <table class="w-full text-left text-xs font-mono-spec">
+                    <thead class="border-b border-zinc-300 text-zinc-500">
+                        <tr>
+                            <th class="py-2">Sector Track</th>
+                            <th class="py-2">2025 Index</th>
+                            <th class="py-2">2028 Projected</th>
+                            <th class="py-2">2031 Graduation Peak</th>
+                        </tr>
+                    </thead>
+                    <tbody id="industry-table-body" class="divide-y divide-zinc-200"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 16 INTERNATIONAL FOOTPRINT BAND -->
+        <section id="sec-16" class="px-4 md:px-8 py-10 border-b border-zinc-300">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div>
+                    <span class="sec-tag mb-2">16 International Footprint Band</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold">35+ partner universities worldwide</h2>
+                    <p class="text-sm text-zinc-600 mt-1">Semester exchange, credit transfer, twinning, and dual-degree pathways across 4 continents.</p>
+                </div>
+                <div class="grid grid-cols-4 sm:grid-cols-8 gap-2 font-mono-spec text-[11px] font-bold">
+                    <div class="wf-placeholder px-3 py-2 text-center">🇺🇸 USA</div>
+                    <div class="wf-placeholder px-3 py-2 text-center">🇬🇧 UK</div>
+                    <div class="wf-placeholder px-3 py-2 text-center">🇨🇦 CAN</div>
+                    <div class="wf-placeholder px-3 py-2 text-center">🇩🇪 GER</div>
+                    <div class="wf-placeholder px-3 py-2 text-center">🇦🇺 AUS</div>
+                    <div class="wf-placeholder px-3 py-2 text-center">🇫🇷 FRA</div>
+                    <div class="wf-placeholder px-3 py-2 text-center">🇯🇵 JPN</div>
+                    <div class="wf-placeholder px-3 py-2 text-center">🇸🇬 SGP</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 17 TESTIMONIALS (3 Video Testimonial Cards) -->
+        <section id="sec-17" class="px-4 md:px-8 py-12 border-b border-zinc-300 bg-zinc-50">
+            <div class="mb-6">
+                <span class="sec-tag mb-2">17 Testimonials · 3 Video Cards</span>
+                <div class="font-mono-spec text-xs text-zinc-500 uppercase mt-1">Straight from students</div>
+                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Video testimonials</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div class="bg-white border-2 border-zinc-900 p-6 flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-11 h-11 rounded-full wf-diag-asset flex items-center justify-center font-mono-spec text-[10px] font-bold">IMG</div>
+                            <div>
+                                <div class="font-bold text-sm">Riya Joshi</div>
+                                <div class="text-xs text-zinc-500">BHM · Placed at Hyatt Regency</div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-zinc-700 leading-relaxed">
+                            “Training in operational hospitality kitchens and receiving mentorship from the placement cell helped me land an international offer.”
+                        </p>
+                    </div>
+                    <button onclick="openLightbox('Video Story · Riya Joshi')" class="wf-outline-cta w-full py-2 text-xs font-bold">
+                        ► Watch story
+                    </button>
+                </div>
+
+                <div class="bg-white border-2 border-zinc-900 p-6 flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-11 h-11 rounded-full wf-diag-asset flex items-center justify-center font-mono-spec text-[10px] font-bold">IMG</div>
+                            <div>
+                                <div class="font-bold text-sm">Kabir Malhotra</div>
+                                <div class="text-xs text-zinc-500">B.Tech CSE · Placed at Zscaler</div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-zinc-700 leading-relaxed">
+                            “Hackathons, cloud labs, and constant coding reviews prepared me to clear every technical round with confidence.”
+                        </p>
+                    </div>
+                    <button onclick="openLightbox('Video Story · Kabir Malhotra')" class="wf-outline-cta w-full py-2 text-xs font-bold">
+                        ► Watch story
+                    </button>
+                </div>
+
+                <div class="bg-white border-2 border-zinc-900 p-6 flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-11 h-11 rounded-full wf-diag-asset flex items-center justify-center font-mono-spec text-[10px] font-bold">IMG</div>
+                            <div>
+                                <div class="font-bold text-sm">Sneha Rawat</div>
+                                <div class="text-xs text-zinc-500">BA LLB (Hons) · Law College Dehradun</div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-zinc-700 leading-relaxed">
+                            “Weekly moot court simulations and legal aid clinics gave me real advocacy exposure before graduation.”
+                        </p>
+                    </div>
+                    <button onclick="openLightbox('Video Story · Sneha Rawat')" class="wf-outline-cta w-full py-2 text-xs font-bold">
+                        ► Watch story
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 18 4-STEP PROCESS -->
+        <section id="sec-18" class="px-4 md:px-8 py-12 border-b border-zinc-300">
+            <div class="mb-6">
+                <span class="sec-tag mb-2">18 4-Step Process</span>
+                <div class="font-mono-spec text-xs text-zinc-500 uppercase mt-1">Ready? Let’s talk.</div>
+                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Admissions process in 4 steps</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="border-2 border-zinc-900 p-5">
+                    <div class="font-mono-spec text-xs font-bold bg-zinc-900 text-white inline-block px-2 py-0.5 mb-2">01</div>
+                    <div class="font-extrabold text-base">Register</div>
+                    <p class="text-xs text-zinc-600 mt-1">Complete your online application form and select your school.</p>
+                </div>
+                <div class="border-2 border-zinc-900 p-5">
+                    <div class="font-mono-spec text-xs font-bold bg-zinc-900 text-white inline-block px-2 py-0.5 mb-2">02</div>
+                    <div class="font-extrabold text-base">Share score</div>
+                    <p class="text-xs text-zinc-600 mt-1">Submit Class 12 marks or entrance test scores for merit review.</p>
+                </div>
+                <div class="border-2 border-zinc-900 p-5">
+                    <div class="font-mono-spec text-xs font-bold bg-zinc-900 text-white inline-block px-2 py-0.5 mb-2">03</div>
+                    <div class="font-extrabold text-base">Interact</div>
+                    <p class="text-xs text-zinc-600 mt-1">Join a 1-on-1 faculty & admissions counselling interaction.</p>
+                </div>
+                <div class="border-2 border-zinc-900 p-5">
+                    <div class="font-mono-spec text-xs font-bold bg-zinc-900 text-white inline-block px-2 py-0.5 mb-2">04</div>
+                    <div class="font-extrabold text-base">Confirm seat</div>
+                    <p class="text-xs text-zinc-600 mt-1">Receive provisional offer letter, lock scholarship, and confirm admission.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 19 CONTACT BAND (Dark BG in Final) -->
+        <section id="sec-19" class="wf-dark-band px-4 md:px-8 py-10 border-b border-zinc-800">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div>
+                    <span class="sec-tag sec-tag-dark mb-2">19 Contact Band</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold">Prefer to just talk?</h2>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <a href="tel:18002124201" class="bg-white text-zinc-950 px-5 py-3 text-sm font-bold">
+                        📞 Call 1800 212 4201
+                    </a>
+                    <a href="#hero-form" class="border border-zinc-500 text-white px-5 py-3 text-sm font-bold hover:bg-zinc-800">
+                        💬 WhatsApp CTA
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 20 FAQ (Accordion with Category Tabs) -->
+        <section id="sec-20" class="px-4 md:px-8 py-12 border-b border-zinc-300">
+            <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
+                <div>
+                    <span class="sec-tag mb-2">20 FAQ · Accordion + Category Tabs</span>
+                    <div class="font-mono-spec text-xs text-zinc-500 uppercase mt-1">Got questions?</div>
+                    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Frequently asked questions</h2>
+                </div>
+
+                <div class="flex flex-wrap gap-1.5 font-mono-spec text-xs" id="comp-faq-tabs">
+                    <button onclick="renderCompFaq('all', this)" class="px-3 py-1.5 bg-zinc-900 text-white font-bold">All</button>
+                    <button onclick="renderCompFaq('admissions', this)" class="px-3 py-1.5 bg-white border border-zinc-400">Admissions</button>
+                    <button onclick="renderCompFaq('fees', this)" class="px-3 py-1.5 bg-white border border-zinc-400">Fees</button>
+                    <button onclick="renderCompFaq('campus', this)" class="px-3 py-1.5 bg-white border border-zinc-400">Campus</button>
+                </div>
+            </div>
+
+            <div id="comp-faq-list" class="space-y-2 max-w-4xl">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- 21 CLOSING CTA (Dark BG + Trust Badge Row: NAAC, UGC, BCI, PCI, AICTE, AIU) -->
+        <section id="sec-21" class="wf-dark-band px-4 md:px-8 py-14 text-center border-b border-zinc-800">
+            <div class="max-w-3xl mx-auto space-y-5">
+                <span class="sec-tag sec-tag-dark">21 Closing CTA + Trust-Badge Row</span>
+                <div class="font-mono-spec text-xs uppercase tracking-widest text-zinc-400">Admissions Open 2027–28 · Dehradun</div>
+                <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight">
+                    Your seat at Uttaranchal University starts with one step.
+                </h2>
+                <p class="text-sm md:text-base text-zinc-300">
+                    Apply early to lock merit scholarships and priority hostel allocation for the 2027–28 session.
+                </p>
+
+                <div class="flex flex-wrap items-center justify-center gap-3 pt-1">
+                    <a href="#hero-form" class="bg-white text-zinc-950 px-7 py-3.5 text-sm font-extrabold">
+                        Apply CTA →
+                    </a>
+                    <a href="tel:18002124201" class="border border-zinc-500 text-white px-6 py-3.5 text-sm font-bold">
+                        Call 1800 212 4201
+                    </a>
+                </div>
+
+                <!-- Trust-Badge Row (6 Badges) -->
+                <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 pt-6">
+                    <div class="border border-dashed border-zinc-600 py-2 font-mono-spec text-xs font-bold">NAAC A+</div>
+                    <div class="border border-dashed border-zinc-600 py-2 font-mono-spec text-xs font-bold">UGC</div>
+                    <div class="border border-dashed border-zinc-600 py-2 font-mono-spec text-xs font-bold">BCI</div>
+                    <div class="border border-dashed border-zinc-600 py-2 font-mono-spec text-xs font-bold">PCI</div>
+                    <div class="border border-dashed border-zinc-600 py-2 font-mono-spec text-xs font-bold">AICTE</div>
+                    <div class="border border-dashed border-zinc-600 py-2 font-mono-spec text-xs font-bold">AIU</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 22 FOOTER (4 Columns) -->
+        <footer id="sec-22" class="bg-zinc-950 text-zinc-400 px-4 md:px-8 py-12 text-xs">
+            <div class="mb-6">
+                <span class="sec-tag sec-tag-dark">22 Footer · 4 Columns</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-8 border-b border-zinc-800">
+                <!-- Col 1: Brand Column -->
+                <div class="space-y-2.5">
+                    <div class="inline-block border border-dashed border-zinc-600 px-3 py-1 font-mono-spec text-zinc-200 font-bold">LOGO</div>
+                    <div class="text-white font-bold text-sm">Uttaranchal University</div>
+                    <p>Premnagar, Dehradun – 248007, Uttarakhand, India</p>
+                    <p class="font-mono-spec text-[11px]">Toll-free: 1800 212 4201</p>
+                </div>
+
+                <!-- Col 2: Admissions Links (5 Anchor Links) -->
+                <div class="space-y-1.5">
+                    <div class="text-white font-bold uppercase font-mono-spec text-[11px] mb-2">Admissions</div>
+                    <div><a href="#hero-form" class="hover:text-white">How to Apply 2027–28</a></div>
+                    <div><a href="#sec-12" class="hover:text-white">Scholarship Calculator</a></div>
+                    <div><a href="#sec-11" class="hover:text-white">Offer Letter Preview</a></div>
+                    <div><a href="#sec-18" class="hover:text-white">4-Step Selection Process</a></div>
+                    <div><a href="#sec-20" class="hover:text-white">Admissions FAQs</a></div>
+                </div>
+
+                <!-- Col 3: Explore Links (5 Anchor Links) -->
+                <div class="space-y-1.5">
+                    <div class="text-white font-bold uppercase font-mono-spec text-[11px] mb-2">Explore</div>
+                    <div><a href="#sec-10" class="hover:text-white">12 Academic Schools</a></div>
+                    <div><a href="#sec-06" class="hover:text-white">Rankings & Accreditations</a></div>
+                    <div><a href="#sec-09" class="hover:text-white">Placements & Recruiters</a></div>
+                    <div><a href="#sec-15" class="hover:text-white">Industry Insights</a></div>
+                    <div><a href="#sec-16" class="hover:text-white">Global Collaborations</a></div>
+                </div>
+
+                <!-- Col 4: Reach Us -->
+                <div class="space-y-1.5">
+                    <div class="text-white font-bold uppercase font-mono-spec text-[11px] mb-2">Reach Us</div>
+                    <div><a href="tel:18002124201" class="hover:text-white">Call Admissions Desk</a></div>
+                    <div><a href="#hero-form" class="hover:text-white">WhatsApp Support</a></div>
+                    <div><a href="#hero-form" class="hover:text-white">Student Grievance Redressal</a></div>
+                    <div><a href="#hero-form" class="hover:text-white">Privacy Policy</a></div>
+                    <div><a href="#hero-form" class="hover:text-white">Terms & Conditions</a></div>
+                </div>
+            </div>
+
+            <div class="pt-6 flex flex-col sm:flex-row justify-between gap-3 text-[11px] text-zinc-500">
+                <span>© 2027 Uttaranchal University, Dehradun. #UniquelyYOU.</span>
+                <span class="font-mono-spec">Wireframe v1 · Competitor Analysis Reference</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- 23 FLOATING ELEMENTS -->
+    <!-- Desktop Persistent "Enquire now" Pill (Fixed Bottom-Right) -->
+    <a
+        href="#hero-form"
+        id="desktop-enquire-pill"
+        class="hidden md:inline-flex items-center gap-2 fixed bottom-6 right-6 z-40 wf-solid-cta px-5 py-3 rounded-full shadow-xl text-xs font-bold"
+    >
+        <span>Enquire now ↑</span>
+    </a>
+
+    <!-- Mobile Sticky Bottom Bar (Visible on Mobile Only) -->
+    <div id="mobile-sticky-bar" class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t-2 border-zinc-900 grid grid-cols-3 divide-x divide-zinc-300 text-xs font-bold shadow-lg">
+        <a href="tel:18002124201" class="py-3.5 text-center">📞 Call</a>
+        <a href="#hero-form" class="py-3.5 text-center">💬 WA</a>
+        <a href="#hero-form" class="py-3.5 text-center bg-zinc-900 text-white">Apply now →</a>
+    </div>
+
+    <!-- Desktop Exit-Intent Modal ("Before you go") -->
+    <div id="exit-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-white border-2 border-zinc-900 max-w-md w-full p-6 relative shadow-2xl">
+            <button onclick="closeExitModal()" class="absolute top-4 right-4 w-8 h-8 border border-zinc-900 font-mono-spec font-bold text-xs">X</button>
+            <span class="sec-tag mb-2">23 Floating · Desktop Exit-Intent Modal</span>
+            <h3 class="text-2xl font-extrabold mt-1">Before you go</h3>
+            <p class="text-sm text-zinc-600 mt-1.5">
+                Get the 2027–28 brochure, fee structure, and scholarship slabs sent straight to your WhatsApp.
+            </p>
+            <form onsubmit="handleSubmit(event, 'Brochure sent on WhatsApp!')" class="mt-4 space-y-3">
+                <input type="tel" required pattern="[0-9]{10}" placeholder="Enter 10-digit WhatsApp number" class="w-full border-2 border-zinc-900 px-3.5 py-2.5 text-sm">
+                <button type="submit" class="wf-solid-cta w-full py-3 text-sm font-bold">
+                    Send on WhatsApp →
+                </button>
+                <p class="text-[11px] text-zinc-500 text-center font-mono-spec">
+                    We'll never share your number
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox-modal" class="hidden fixed inset-0 z-50 bg-black/75 flex items-center justify-center p-4">
+        <div class="bg-white border-2 border-zinc-900 max-w-2xl w-full p-6 relative">
+            <button onclick="closeLightbox()" class="absolute top-4 right-4 w-8 h-8 border border-zinc-900 font-mono-spec font-bold text-xs">X</button>
+            <div class="font-mono-spec text-xs text-zinc-500 uppercase mb-1">Lightbox Preview</div>
+            <h3 id="lightbox-title" class="text-lg font-extrabold mb-4">Media Preview</h3>
+            <div class="wf-diag-asset aspect-video flex items-center justify-center p-6">
+                <span class="bg-white border border-zinc-900 px-4 py-2 font-mono-spec text-xs font-bold">MEDIA / VIDEO PLAYER PLACEHOLDER</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="hidden fixed top-16 right-4 z-50 bg-zinc-950 text-white border border-zinc-700 px-4 py-3 text-xs font-mono-spec shadow-xl"></div>
+
+    <script>
+        // Hero Slideshow Controls (Section 03)
+        const heroSlides = [
+            'Slide 01 / 04 · Crossfade Campus Aerial View',
+            'Slide 02 / 04 · Moot Court & Academic Blocks',
+            'Slide 03 / 04 · Advanced Engineering & Pharma Labs',
+            'Slide 04 / 04 · Convocation & Placement Celebrations'
+        ];
+        function setHeroSlide(idx) {
+            document.getElementById('hero-slide-caption').textContent = heroSlides[idx];
+            document.querySelectorAll('.hero-slide-btn').forEach((btn, i) => {
+                btn.className = i === idx
+                    ? 'hero-slide-btn px-2 py-0.5 bg-zinc-900 text-white font-bold'
+                    : 'hero-slide-btn px-2 py-0.5 text-zinc-700';
+            });
+        }
+
+        // 12 Schools with UG / PG Toggle (Section 10)
+        const schoolsList = [
+            { name: 'Law College Dehradun', ug: 'BA LLB (Hons), BBA LLB (Hons), LLB (Hons)', pg: 'LLM (Constitutional, Corporate, Criminal)' },
+            { name: 'Uttaranchal Institute of Technology', ug: 'B.Tech CSE, AI/ML, Civil, Mechanical, ECE', pg: 'M.Tech CSE, Structural, Thermal' },
+            { name: 'Uttaranchal Institute of Management', ug: 'BBA (Hons), B.Com (Hons), BA Economics', pg: 'MBA (Finance, Marketing, Analytics, HR)' },
+            { name: 'Institute of Pharmaceutical Sciences', ug: 'B.Pharm, Pharm.D, D.Pharm', pg: 'M.Pharm (Pharmaceutics, Pharmacology)' },
+            { name: 'School of Computing Sciences', ug: 'BCA (Hons), B.Sc IT & Data Science', pg: 'MCA (2-Year Full-Time)' },
+            { name: 'School of Agriculture', ug: 'B.Sc (Hons) Agriculture, Forestry', pg: 'M.Sc Agronomy, Horticulture' },
+            { name: 'Applied & Life Sciences', ug: 'B.Sc (Hons) Biotech, Food Tech, Forensics', pg: 'M.Sc Biotechnology, Microbiology, Chemistry' },
+            { name: 'School of Liberal Arts', ug: 'BA (Hons) Psychology, Journalism, English', pg: 'MA Psychology, Journalism & Mass Comm' },
+            { name: 'College of Nursing', ug: 'B.Sc Nursing, GNM', pg: 'M.Sc Nursing Specialisations' },
+            { name: 'College of Health Sciences', ug: 'BPT (Physiotherapy), B.Sc MLT, Optometry', pg: 'MPT (Orthopaedics, Neurology)' },
+            { name: 'Hotel & Hospitality Management', ug: 'BHM (4-Year), B.Sc Hospitality Admin', pg: 'MHM (Hospitality & Tourism)' },
+            { name: 'Medical College of Ayurveda', ug: 'BAMS (5.5-Year Professional Degree)', pg: 'MD / MS Ayurveda' }
+        ];
+
+        function setCourseLevel(level) {
+            const ugBtn = document.getElementById('toggle-ug');
+            const pgBtn = document.getElementById('toggle-pg');
+            ugBtn.className = level === 'UG' ? 'px-4 py-2 bg-zinc-900 text-white' : 'px-4 py-2 bg-white text-zinc-900';
+            pgBtn.className = level === 'PG' ? 'px-4 py-2 bg-zinc-900 text-white' : 'px-4 py-2 bg-white text-zinc-900';
+
+            const grid = document.getElementById('competitor-schools-grid');
+            grid.innerHTML = schoolsList.map((s, idx) => `
+                <div class="border border-zinc-400 hover:border-zinc-900 p-4 flex flex-col justify-between transition">
+                    <div>
+                        <div class="font-mono-spec text-[10px] text-zinc-500 uppercase">School ${String(idx + 1).padStart(2, '0')} · ${level}</div>
+                        <div class="font-bold text-sm mt-1">${s.name}</div>
+                        <div class="text-xs text-zinc-600 mt-1.5">${level === 'UG' ? s.ug : s.pg}</div>
+                    </div>
+                    <a href="#hero-form" class="font-mono-spec text-[11px] font-bold underline mt-3 inline-block">Enquire →</a>
+                </div>
+            `).join('');
+        }
+
+        // Offer Letter Generator (Section 11)
+        function generateOfferLetter(e) {
+            e.preventDefault();
+            const prog = document.getElementById('offer-prog').value;
+            const role = document.getElementById('offer-role').value.trim() || 'Software Engineer';
+            const name = document.getElementById('offer-name').value.trim() || 'Future UUian';
+
+            document.getElementById('preview-name').textContent = name;
+            document.getElementById('preview-name-foot').textContent = name;
+            document.getElementById('preview-prog').textContent = prog;
+            document.getElementById('preview-prog-foot').textContent = prog;
+            document.getElementById('preview-role').textContent = role;
+        }
+
+        // Scholarship Calculator (Section 12)
+        function runCompetitorCalc() {
+            const pct = parseFloat(document.getElementById('comp-score').value) || 0;
+            const topup = document.getElementById('need-topup').checked;
+            let waiver = 0;
+            if (pct >= 95) waiver = 100;
+            else if (pct >= 85) waiver = 60;
+            else if (pct >= 75) waiver = 35;
+            else if (pct >= 65) waiver = 20;
+
+            if (topup) waiver = Math.min(100, waiver + 10);
+            document.getElementById('comp-calc-result').textContent = waiver > 0
+                ? `${waiver}% Tuition Waiver`
+                : 'Contact Counsellor for Aid';
+        }
+
+        // Culture Carousel (Section 14)
+        const carouselSlides = [
+            { title: 'Slide 01 · Central Library & Digital Archives', desc: '2,430 sq m learning commons with 24×7 digital journal access.' },
+            { title: 'Slide 02 · Annual Cultural Fest & Student Clubs', desc: 'National youth festivals, hackathons, and 40+ student societies.' },
+            { title: 'Slide 03 · Residential Hostels & Food Court', desc: 'On-campus hostels with 500-seat multi-cuisine dining court.' },
+            { title: 'Slide 04 · Sports Complex & Himalayan Backdrop', desc: 'Outdoor athletics, indoor courts, and wellness facilities.' }
+        ];
+        let carouselIdx = 0;
+
+        function renderCarousel() {
+            const container = document.getElementById('culture-carousel');
+            const s1 = carouselSlides[carouselIdx % carouselSlides.length];
+            const s2 = carouselSlides[(carouselIdx + 1) % carouselSlides.length];
+            container.innerHTML = [s1, s2].map(s => `
+                <div onclick="openLightbox('${s.title}')" class="wf-diag-asset p-6 min-h-[240px] flex flex-col justify-end cursor-pointer hover:border-zinc-900">
+                    <div class="bg-white/95 border border-zinc-900 p-4">
+                        <div class="font-mono-spec text-xs font-bold">${s.title}</div>
+                        <div class="text-xs text-zinc-600 mt-1">${s.desc}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('carousel-dots').innerHTML = carouselSlides.map((_, i) => `
+                <button onclick="carouselIdx=${i};renderCarousel()" class="w-2.5 h-2.5 border border-zinc-900 ${i === carouselIdx ? 'bg-zinc-900' : 'bg-white'}"></button>
+            `).join('');
+        }
+
+        function moveCarousel(dir) {
+            carouselIdx = (carouselIdx + dir + carouselSlides.length) % carouselSlides.length;
+            renderCarousel();
+        }
+        setInterval(() => moveCarousel(1), 5000);
+
+        // Industry Insights Tabs (Section 15)
+        const industryData = [
+            {
+                title: 'Industry at a glance: Tech & AI',
+                desc: 'Enterprise adoption of generative AI, cloud security, and full-stack engineering is driving sustained demand for graduates trained in live computing labs.',
+                s1v: '38%', s1l: 'CAGR in AI & Cloud hiring',
+                s2v: '₹19.5 L', s2l: 'Top UU tech offer (Zscaler)',
+                source: 'Source: NASSCOM & UU Placement Report 2025',
+                bars: [
+                    { label: '2025 Baseline Demand', val: 58 },
+                    { label: '2028 Mid-Degree Surge', val: 79 },
+                    { label: '2031 Graduation Peak', val: 94 }
+                ]
+            },
+            {
+                title: 'Industry at a glance: Pharma & Healthcare',
+                desc: 'India’s clinical research, biologics, and hospital care expansion places NIRF #75 ranked pharmacy and nursing graduates at the forefront of healthcare hiring.',
+                s1v: '$130 B', s1l: 'Projected Indian Pharma market',
+                s2v: '#75', s2l: 'UU NIRF Pharmacy Rank 2025',
+                source: 'Source: IBEF Healthcare Outlook & NIRF 2025',
+                bars: [
+                    { label: '2025 Baseline Demand', val: 62 },
+                    { label: '2028 Clinical R&D Growth', val: 81 },
+                    { label: '2031 Graduation Peak', val: 91 }
+                ]
+            },
+            {
+                title: 'Industry at a glance: Hospitality & Tourism',
+                desc: 'Global luxury hotel chains and aviation hospitality groups actively recruit Dehradun hospitality graduates for international management trainee roles.',
+                s1v: '₹45 L', s1l: 'Highest offer (Hyatt Regency)',
+                s2v: '100%', s2l: 'International internship placement',
+                source: 'Source: WTTC Travel Report & UU Placement Cell',
+                bars: [
+                    { label: '2025 Baseline Demand', val: 64 },
+                    { label: '2028 Luxury Expansion', val: 83 },
+                    { label: '2031 Graduation Peak', val: 92 }
+                ]
+            },
+            {
+                title: 'Industry at a glance: Graduate Employability',
+                desc: 'Employers prioritise candidates with interdisciplinary problem-solving, internships, and verified project portfolios over rote exam scores.',
+                s1v: '80%', s1l: 'UU overall placement rate',
+                s2v: '1200+', s2l: 'Recruiting organisations',
+                source: 'Source: India Skills Report & UU Career Services',
+                bars: [
+                    { label: '2025 Campus Offers', val: 72 },
+                    { label: '2028 Corporate Tie-ups', val: 85 },
+                    { label: '2031 Projected Outcomes', val: 95 }
+                ]
+            }
+        ];
+
+        function selectIndustryTab(idx) {
+            document.querySelectorAll('.ind-tab').forEach((b, i) => {
+                b.className = i === idx
+                    ? 'ind-tab px-4 py-2.5 text-xs font-bold bg-zinc-900 text-white border border-zinc-900'
+                    : 'ind-tab px-4 py-2.5 text-xs font-bold bg-white text-zinc-900 border border-zinc-400';
+            });
+
+            const d = industryData[idx];
+            document.getElementById('ind-title').textContent = d.title;
+            document.getElementById('ind-desc').textContent = d.desc;
+            document.getElementById('ind-stat1-val').textContent = d.s1v;
+            document.getElementById('ind-stat1-lbl').textContent = d.s1l;
+            document.getElementById('ind-stat2-val').textContent = d.s2v;
+            document.getElementById('ind-stat2-lbl').textContent = d.s2l;
+            document.getElementById('ind-source').textContent = d.source;
+
+            document.getElementById('industry-bars').innerHTML = d.bars.map(b => `
+                <div>
+                    <div class="flex justify-between font-mono-spec text-xs mb-1">
+                        <span>${b.label}</span>
+                        <span class="font-bold">${b.val}%</span>
+                    </div>
+                    <div class="w-full h-4 bg-zinc-200 border border-zinc-400">
+                        <div class="h-full bg-zinc-900 transition-all duration-500" style="width: ${b.val}%"></div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('industry-table-body').innerHTML = industryData.map(item => `
+                <tr>
+                    <td class="py-2 font-bold">${item.title.replace('Industry at a glance: ', '')}</td>
+                    <td class="py-2">${item.bars[0].val}%</td>
+                    <td class="py-2">${item.bars[1].val}%</td>
+                    <td class="py-2">${item.bars[2].val}%</td>
+                </tr>
+            `).join('');
+        }
+
+        function toggleIndustryTable() {
+            document.getElementById('industry-table-wrap').classList.toggle('hidden');
+        }
+
+        // FAQ Accordion (Section 20)
+        const compFaqs = [
+            { q: 'How do I apply for the 2027–28 session at Uttaranchal University?', a: 'Fill in the online enquiry/application form on this page, upload your academic documents, and complete your counselling interaction.', cat: 'admissions' },
+            { q: 'What accreditations and rankings does UU hold?', a: 'UU holds NAAC A+ accreditation, UGC 2(f) & 12(B) recognition, NIRF #75 rank in Pharmacy, and statutory approvals from AICTE, BCI, PCI, INC, and AIU.', cat: 'admissions' },
+            { q: 'How are merit and need-based scholarships calculated?', a: 'Up to 100% tuition fee waivers are granted based on Class 12 aggregate or national entrance scores, plus additional top-ups for domicile and girl applicants.', cat: 'fees' },
+            { q: 'Are semester-wise fee instalments and education loans supported?', a: 'Yes, fees can be paid semester-wise and our campus admission desk assists with documentation for nationalised bank education loans.', cat: 'fees' },
+            { q: 'What hostel and campus facilities are available in Dehradun?', a: 'Separate boys and girls hostels with 1- to 4-sharing rooms, 24×7 Wi-Fi, medical care, 2,430 sq m central library, and a 500-seat food court.', cat: 'campus' },
+            { q: 'Can I schedule a guided campus tour before confirming admission?', a: 'Yes, campus visits and face-to-face faculty interactions are available Monday through Saturday at Premnagar, Dehradun.', cat: 'campus' }
+        ];
+
+        function renderCompFaq(cat = 'all', btn = null) {
+            if (btn) {
+                document.querySelectorAll('#comp-faq-tabs button').forEach(b => {
+                    b.className = 'px-3 py-1.5 bg-white border border-zinc-400';
+                });
+                btn.className = 'px-3 py-1.5 bg-zinc-900 text-white font-bold';
+            }
+            const items = cat === 'all' ? compFaqs : compFaqs.filter(f => f.cat === cat);
+            document.getElementById('comp-faq-list').innerHTML = items.map((f, i) => `
+                <details class="border border-zinc-400 bg-white" ${i === 0 ? 'open' : ''}>
+                    <summary class="p-4 font-bold text-sm cursor-pointer flex items-center justify-between list-none">
+                        <span><span class="font-mono-spec text-xs text-zinc-500 mr-2">${String(i + 1).padStart(2, '0')}</span>${f.q}</span>
+                        <span class="font-mono-spec text-xs border border-zinc-400 px-1.5">+</span>
+                    </summary>
+                    <div class="px-4 pb-4 pt-1 text-xs md:text-sm text-zinc-600 border-t border-zinc-200">${f.a}</div>
+                </details>
+            `).join('');
+        }
+
+        // Viewport Switcher
+        function setViewport(mode) {
+            const canvas = document.getElementById('wireframe-canvas');
+            const btnD = document.getElementById('btn-desktop');
+            const btnM = document.getElementById('btn-mobile');
+            const pill = document.getElementById('desktop-enquire-pill');
+            const mobBar = document.getElementById('mobile-sticky-bar');
+
+            if (mode === 'mobile') {
+                canvas.classList.remove('desktop-view');
+                canvas.classList.add('mobile-view');
+                btnM.className = 'px-2.5 py-1 bg-white text-zinc-950 font-bold text-[11px]';
+                btnD.className = 'px-2.5 py-1 border border-zinc-600 text-zinc-300 text-[11px]';
+                pill.classList.add('hidden');
+                mobBar.classList.remove('md:hidden');
+            } else {
+                canvas.classList.remove('mobile-view');
+                canvas.classList.add('desktop-view');
+                btnD.className = 'px-2.5 py-1 bg-white text-zinc-950 font-bold text-[11px]';
+                btnM.className = 'px-2.5 py-1 border border-zinc-600 text-zinc-300 text-[11px]';
+                pill.classList.remove('hidden');
+                mobBar.classList.add('md:hidden');
+            }
+        }
+
+        // Modals & Form Handler
+        let exitShown = false;
+        function openExitModal() { document.getElementById('exit-modal').classList.remove('hidden'); }
+        function closeExitModal() { document.getElementById('exit-modal').classList.add('hidden'); }
+        function openLightbox(title) {
+            document.getElementById('lightbox-title').textContent = title;
+            document.getElementById('lightbox-modal').classList.remove('hidden');
+        }
+        function closeLightbox() { document.getElementById('lightbox-modal').classList.add('hidden'); }
+
+        function handleSubmit(e, msg) {
+            e.preventDefault();
+            closeExitModal();
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 3200);
+        }
+
+        document.addEventListener('mouseleave', (e) => {
+            if (e.clientY <= 0 && !exitShown) {
+                exitShown = true;
+                openExitModal();
+            }
+        });
+
+        // Init
+        setCourseLevel('UG');
+        runCompetitorCalc();
+        renderCarousel();
+        selectIndustryTab(0);
+        renderCompFaq('all');
+    </script>
+</body>
+</html>
