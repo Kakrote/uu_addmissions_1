@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 :root {
+  --oswald: "Oswald";
+  --dmsans: "DM Sans";
+  --instrument: "Instrument Sans";
+
   /* 01 · Brand Core */
   --color-16: #16437d; /* University Blue */
   --color-fc: #fca700; /* Amber */
